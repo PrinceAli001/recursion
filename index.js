@@ -24,4 +24,40 @@ function display() {
             return fibsRec(num, i += 1, j += 1);
         };
     };
+
+    const mergeSort = function (arr) {
+        if (arr.length < 2) {
+            return arr;
+        }
+
+        let middle = Math.floor(arr.length / 2);
+        let leftSide = arr.slice(0,middle);
+        let rightSide = arr.slice(middle);
+        let result = merge(mergeSort(leftSide),mergeSort(rightSide));
+        return result;
+    }
+
+    const merge = function (left,right) {
+        let newArr = [];
+        while (left.length && right.length) {
+            if (left[0] < right[0]) {
+                newArr.push(left.shift());
+            } else {
+                newArr.push(right.shift());
+            };
+        };
+
+        while (left.length) {
+            newArr.push(left.shift());
+        };
+
+        while (right.length) {
+            newArr.push(right.shift());
+        };
+
+        return newArr;
+    };
+
+
+    console.log(mergeSort([105,79,100,110]));
 };
